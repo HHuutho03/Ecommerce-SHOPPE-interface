@@ -4,8 +4,6 @@ import { shopping_cart } from "../../utils/images";
 import { formatPrice } from "../../utils/helpers";
 
 const CartModal = ({ carts }) => {
-  console.log("carts", carts);
-
   return (
     <div className="cart-modal">
       <h5 className="cart-modal-title fw-5 fs-15 font-manrope text-center">Recenlty Added Products</h5>

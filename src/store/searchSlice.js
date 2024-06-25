@@ -3,39 +3,39 @@ import { BASE_URL } from "../utils/apiURL";
 import { STATUS } from "../utils/status";
 
 const initialState = {
-    searchProducts: [],
-    searchProductsStatus: STATUS.IDLE
-}
+  searchProducts: [],
+  searchProductsStatus: STATUS.IDLE,
+};
 
 const searchSlice = createSlice({
-    name: 'search',
-    initialState,
-    reducers: {
-        clearSearch: (state, action) => {
-            state.searchProducts = [];
-        }
+  name: "search",
+  initialState,
+  reducers: {
+    clearSearch: (state, action) => {
+      state.searchProducts = [];
     },
-    extraReducers: (builder) => {
-        builder
-        .addCase(fetchAsyncSearchProduct.pending, (state, action) => {
-            state.searchProductsStatus = STATUS.LOADING;
-        })
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAsyncSearchProduct.pending, (state, action) => {
+        state.searchProductsStatus = STATUS.LOADING;
+      })
 
-        .addCase(fetchAsyncSearchProduct.fulfilled, (state, action) => {
-            state.searchProducts = action.payload;
-            state.searchProductsStatus = STATUS.SUCCEEDED;
-        })
+      .addCase(fetchAsyncSearchProduct.fulfilled, (state, action) => {
+        state.searchProducts = action.payload;
+        state.searchProductsStatus = STATUS.SUCCEEDED;
+      })
 
-        .addCase(fetchAsyncSearchProduct.rejected, (state, action) => {
-            state.searchProductsStatus = STATUS.FAILED;
-        })
-    }
-})
+      .addCase(fetchAsyncSearchProduct.rejected, (state, action) => {
+        state.searchProductsStatus = STATUS.FAILED;
+      });
+  },
+});
 
-export const fetchAsyncSearchProduct = createAsyncThunk('product-search/fetch', async(searchTerm) => {
-    const response = await fetch(`${BASE_URL}products/search?q=${searchTerm}`);
-    const data = await response.json();
-    return data.products;
+export const fetchAsyncSearchProduct = createAsyncThunk("product-search/fetch", async (searchTerm) => {
+  const response = await fetch(`${BASE_URL}api/get-all-product-search?q=${searchTerm}`);
+  const data = await response.json();
+  return data.data;
 });
 
 export const { setSearchTerm, clearSearch } = searchSlice.actions;

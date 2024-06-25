@@ -46,6 +46,7 @@ const categorySlice = createSlice({
 export const fetchAsyncCategories = createAsyncThunk("categories/fetch", async () => {
   const response = await fetch(`${BASE_URL}products/categories`);
   const data = await response.json();
+  
   const names = data.data.map((item) => item.name);
   return names;
 });
@@ -53,7 +54,8 @@ export const fetchAsyncCategories = createAsyncThunk("categories/fetch", async (
 export const fetchAsyncProductsOfCategory = createAsyncThunk("category-products/fetch", async (category) => {
   const response = await fetch(`${BASE_URL}products/category/${category}`);
   const data = await response.json();
-  return data.products;
+  console.log("data", data.data);
+  return data.data;
 });
 
 export const getAllCategories = (state) => state.category.categories;

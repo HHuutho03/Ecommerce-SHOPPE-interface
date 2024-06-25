@@ -15,7 +15,7 @@ const CartPage = () => {
   const carts = useSelector(getAllCarts);
 
   const { authUser } = useAuthContext();
-  const { image, password, ...newauth } = authUser;
+  const { ...newauth } = authUser;
 
   const { loading, checkOut } = useCheckOut();
   const { itemsCount, totalAmount } = useSelector((state) => state.cart);

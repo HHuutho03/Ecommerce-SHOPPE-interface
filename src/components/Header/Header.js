@@ -10,7 +10,6 @@ import Register from "../../pages/register/Register";
 const Header = () => {
   const { authUser } = useAuthContext();
   const { loading, logout } = useLogout();
-  console.log("authUser", authUser);
   const [modalIsOpenLogin, setIsOpenLogin] = useState(false);
   const [modalIsOpenRegister, setIsOpenRegister] = useState(false);
   const [isHover, setIsHover] = useState(false);
